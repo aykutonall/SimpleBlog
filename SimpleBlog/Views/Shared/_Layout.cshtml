@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Simple Blog</title>
+</head>
+<body>
+    <header>
+        <h1>
+            <a href="@Url.RouteUrl("Home")">Simple Blog</a>
+        </h1>
+        <h3>
+            <a href="@Url.RouteUrl("Login")">Login</a>
+        </h3>
+    </header>
+
+    <!--Insert View Here-->
+    @RenderBody()
+
+    <footer>
+        &copy; @DateTime.UtcNow.Year - aykutonall
+    </footer>
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NHibernate.Linq;
+using SimpleBlog.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,7 @@ namespace SimpleBlog.Controllers
     {
         public ActionResult Index()
         {
-            //return Content("<h1>Hello World</h1>");
+            List<User> users = Database.Session.Query<User>().ToList().Where(p => p.Email.Contains("yahoo")).ToList();
             return View();
         }
     }

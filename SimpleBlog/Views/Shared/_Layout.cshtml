@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Web.Optimization
 @{
     Layout = null;
 }
@@ -8,25 +8,45 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    @RenderSection("Head", false)
     <title>@ViewBag.Title - Simple Blog</title>
+    @Styles.Render("~/styles")
 </head>
 <body>
     <header>
         <h1>
             <a href="@Url.RouteUrl("Home")">Simple Blog</a>
+            <i class="glyphicon glyphicon-bell"></i>
         </h1>
-        <h3>
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>Welcome back, @Auth.User.Email</p>
+
+            <a href="@Url.RouteUrl("Logout")">Logout</a>
+
+            if (User.IsInRole("admin"))
+            {
+                <a href="@Url.Action("Index", "Posts", new { area = "admin" })">View posts in admin panel</a>
+            }
+        }
+        else
+        {
             <a href="@Url.RouteUrl("Login")">Login</a>
-        </h3>
+        }
     </header>
 
     <!--Insert View Here-->
     @RenderBody()
 
     <footer>
+        This page is under construction now ! <br />
         &copy; @DateTime.UtcNow.Year - aykutonall
+        <br />
+        All rights reserved.
     </footer>
 
+    @Scripts.Render("~/scripts")
     @RenderSection("Scripts", false)
 
 </body>
